@@ -45,7 +45,11 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // if ($request->hasFile('image')){
+        //     $request->file('image')->store('images');
+        // }
+    
+        
         $libros=$this->book->create($request->all());
         return response()->json($libros);
 
@@ -85,7 +89,7 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
         $libros=Book::find($id);
         $libros->update($request->all());
         return response()->json($libros);

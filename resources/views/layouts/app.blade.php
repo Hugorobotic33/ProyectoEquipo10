@@ -11,6 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -18,6 +19,10 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+
+   
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous"> --}}
 </head>
 <body>
     <div id="app">
@@ -68,13 +73,19 @@
                             </li>
                         @endguest
                     </ul>
+
                 </div>
             </div>
         </nav>
+        
 
         <main class="py-4">
             @yield('content')
         </main>
     </div>
+    
+    <script type="text/javascript" src="{{asset('js/index.js')}}"></script>
+    {{-- <img src="./img/" alt="">
+    <h2>xd</h2> --}}
 </body>
 </html>

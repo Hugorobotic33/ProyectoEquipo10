@@ -30,7 +30,8 @@ class Book extends FormRequest
             'autor'=>'required',
             'genero'=>'required',
             'paginas'=>'required',
-            'isbn'=>'required'
+            'isbn'=>'required',
+            'image'=>'required'
         ];
     }
 }

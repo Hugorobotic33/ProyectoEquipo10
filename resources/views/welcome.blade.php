@@ -7,9 +7,8 @@
         <title>Laravel</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
-
-        <!-- Styles -->
+       
+        
         <style>
             html, body {
                 background-color: #fff;
@@ -62,10 +61,30 @@
                 margin-bottom: 30px;
             }
         </style>
+        <script src="{{asset('js/jquery-3.3.1.js')}}"></script>
+        <script src="{{asset('js/jquery-ui.js')}}"></script>
+        <script type="text/javascript">
+
+        $(document).ready(function(){
+            console.log("hola");
+         $("#guardar").click(function(){
+              $("#guardarModal").modal("hide");
+
+         });
+
+        });
+        
+        
+        </script>
+         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
+         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
     </head>
     <body>
         <div class="flex-center position-ref full-height">
+            
             @if (Route::has('login'))
+           
                 <div class="top-right links">
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
@@ -80,24 +99,23 @@
             @endif
 
             <div class="content">
-                <div class="title m-b-md">
+                {{-- <img src="./img/xd.jpg" alt=""> --}}
+                {{-- <div class="title m-b-md">
                     Laravel
-                </div>
-                <example-componente>
-                    
-                </example-componente>    
+                </div> --}}
+                <div id="app">
+                    <example-component>
+                       
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                      
+                    </example-component>    
+                          
                 </div>
+                <script src="{{asset('js/app.js')}}"></script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
             </div>
+
+            
         </div>
     </body>
 </html>

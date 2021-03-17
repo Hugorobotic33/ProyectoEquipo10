@@ -15,15 +15,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('libros','BookController@index');
-Route::get('libros/{id}','BookController@show');
-Route::post('libros/guardar','BookController@store');
-Route::put('libros/update','BookController@update');
-Route::delete('libros/delete/{id}','BookController@destroy');
+
+Route::group(['middleware'=>['cors']],function(){
+  Route::get('libros','BookController@index');
+  Route::get('libros/buscar/{id}','BookController@show');
+  Route::post('libros/guardar','BookController@store');
+  Route::put('libros/update/{id}','BookController@update');
+  Route::delete('libros/delete/{id}','BookController@destroy');
+
+});
 
 Route::group(['prefix'=>'api'],function(){
   Route::apiResource('libros','BookController');
 });
+
 
 
 

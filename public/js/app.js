@@ -1908,6 +1908,8 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -1924,9 +1926,313 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      name: "",
+      editorial: "",
+      autor: "",
+      genero: "",
+      paginas: "",
+      isbn: "",
+      image: "",
+      update: 0,
+      librosxd: []
+    };
+  },
   mounted: function mounted() {
+    this.getLibros();
     console.log('Component mounted.');
+  },
+  methods: {
+    getLibros: function getLibros() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/libros").then(function (response) {
+        return _this.librosxd = response.data;
+      });
+    },
+    // obtenerImage(e){
+    //   this.image=e.target.files[0];
+    // this.image=e.target.files[0];
+    //   file.readAsDataUrl(e.target.files[0]);
+    //   console.log(e.target.files[0]);
+    //  var file=new FileReader();
+    // if (file.readAsDataURL) {
+    //  file.readAsDataURL(e.target.files[0]);
+    // }else if (file.readAsDataurl) {
+    //   file.readAsDataurl(e.target.files[0]);
+    //  }
+    // file.onload=(e)=>{
+    //   this.image=e.target.result;
+    //  }
+    // console.log(this.image);
+    // console.log("xd");
+    // },
+    deleteBook: function deleteBook(data) {
+      var xd = this;
+      var libro_id = data.id;
+
+      if (confirm("Seguro que quieres eliminar el libro " + data.name + "?")) {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("libros/delete/" + libro_id).then(function (response) {
+          xd.getLibros();
+        })["catch"](function (error) {
+          console.log("error");
+        });
+      }
+    },
+    loadBook: function loadBook(data) {
+      this.update = data.id;
+      var xd = this;
+      var url = "libros/buscar/" + this.update;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(url).then(function (response) {
+        xd.name = response.data.name;
+        xd.editorial = response.data.editorial;
+        xd.autor = response.data.autor;
+        xd.genero = response.data.genero;
+        xd.paginas = response.data.paginas;
+        xd.isbn = response.data.isbn;
+        xd.image = response.data.image;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    updateBook: function updateBook() {
+      var xd = this;
+      var url = "libros/update/" + this.update;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.put(url, {
+        "id": this.update,
+        "name": this.name,
+        "editorial": this.editorial,
+        "autor": this.autor,
+        "genero": this.genero,
+        "paginas": this.paginas,
+        "isbn": this.isbn,
+        "image": this.image
+      }).then(function (response) {
+        xd.getLibros();
+        xd.limpiarCampos();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    addBook: function addBook() {
+      // const fd= new FormData();
+      // const re=fd.append('image',this.image);
+      var xd = this;
+      var url = "libros/guardar";
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, {
+        'name': this.name,
+        'editorial': this.editorial,
+        'autor': this.autor,
+        'genero': this.genero,
+        'paginas': this.paginas,
+        'isbn': this.isbn,
+        'image': this.image
+      }).then(function (response) {
+        xd.getLibros(), xd.limpiarCampos();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    limpiarCampos: function limpiarCampos() {
+      this.name = "", this.editorial = "", this.autor = "", this.genero = "", this.paginas = "", this.isbn = "", this.image = "", this.update = 0;
+    }
   }
 });
 
@@ -37584,29 +37890,732 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _c("table", { staticClass: "table table-hover table-striped" }, [
+        _vm._m(1),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          _vm._l(_vm.librosxd, function(libro) {
+            return _c("tr", { key: libro.id }, [
+              _c("td", { domProps: { textContent: _vm._s(libro.id) } }),
+              _vm._v(" "),
+              _c("td", { domProps: { textContent: _vm._s(libro.name) } }),
+              _vm._v(" "),
+              _c("td", { domProps: { textContent: _vm._s(libro.editorial) } }),
+              _vm._v(" "),
+              _c("td", { domProps: { textContent: _vm._s(libro.autor) } }),
+              _vm._v(" "),
+              _c("td", { domProps: { textContent: _vm._s(libro.genero) } }),
+              _vm._v(" "),
+              _c("td", { domProps: { textContent: _vm._s(libro.paginas) } }),
+              _vm._v(" "),
+              _c("td", { domProps: { textContent: _vm._s(libro.isbn) } }),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.deleteBook(libro)
+                      }
+                    }
+                  },
+                  [_c("i", { staticClass: "bi bi-trash" })]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: {
+                      type: "button",
+                      "data-toggle": "modal",
+                      "data-target": "#actualizarModal"
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.loadBook(libro)
+                      }
+                    }
+                  },
+                  [_c("i", { staticClass: "bi bi-pencil-square" })]
+                )
+              ])
+            ])
+          }),
+          0
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "guardarModal",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "exampleModalLabel",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "modal-dialog", attrs: { role: "document" } },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(2),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _c("form", [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { for: "nom" }
+                        },
+                        [_vm._v("Nombre:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.name,
+                            expression: "name"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "nom" },
+                        domProps: { value: _vm.name },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.name = $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { for: "edit" }
+                        },
+                        [_vm._v("Editorial:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.editorial,
+                            expression: "editorial"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "edit" },
+                        domProps: { value: _vm.editorial },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.editorial = $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { for: "aut" }
+                        },
+                        [_vm._v("Autor:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.autor,
+                            expression: "autor"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "aut" },
+                        domProps: { value: _vm.autor },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.autor = $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { for: "gen" }
+                        },
+                        [_vm._v("Genero:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.genero,
+                            expression: "genero"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "gen" },
+                        domProps: { value: _vm.genero },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.genero = $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { for: "pag" }
+                        },
+                        [_vm._v("Precio:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.paginas,
+                            expression: "paginas"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "pag" },
+                        domProps: { value: _vm.paginas },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.paginas = $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { for: "isb" }
+                        },
+                        [_vm._v("ISBN:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.isbn,
+                            expression: "isbn"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "isb" },
+                        domProps: { value: _vm.isbn },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.isbn = $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { for: "image" }
+                        },
+                        [_vm._v("Imagen:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.image,
+                            expression: "image"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "image" },
+                        domProps: { value: _vm.image },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.image = $event.target.value
+                          }
+                        }
+                      })
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-footer" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-secondary",
+                      attrs: { type: "button", "data-dismiss": "modal" }
+                    },
+                    [_vm._v("Cerrar")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { type: "button", id: "guardar" },
+                      on: {
+                        click: function($event) {
+                          return _vm.addBook()
+                        }
+                      }
+                    },
+                    [_vm._v("Guardar")]
+                  )
+                ])
+              ])
+            ]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "actualizarModal",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "exampleModalLabel",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "modal-dialog", attrs: { role: "document" } },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _vm._m(3),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _c("form", [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { for: "nom" }
+                        },
+                        [_vm._v("Nombre:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.name,
+                            expression: "name"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "nom" },
+                        domProps: { value: _vm.name },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.name = $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { for: "edit" }
+                        },
+                        [_vm._v("Editorial:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.editorial,
+                            expression: "editorial"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "edit" },
+                        domProps: { value: _vm.editorial },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.editorial = $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { for: "aut" }
+                        },
+                        [_vm._v("Autor:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.autor,
+                            expression: "autor"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "aut" },
+                        domProps: { value: _vm.autor },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.autor = $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { for: "gen" }
+                        },
+                        [_vm._v("Genero:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.genero,
+                            expression: "genero"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "gen" },
+                        domProps: { value: _vm.genero },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.genero = $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { for: "pag" }
+                        },
+                        [_vm._v("Precio:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.paginas,
+                            expression: "paginas"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "pag" },
+                        domProps: { value: _vm.paginas },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.paginas = $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { for: "isb" }
+                        },
+                        [_vm._v("ISBN:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.isbn,
+                            expression: "isbn"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "isb" },
+                        domProps: { value: _vm.isbn },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.isbn = $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-form-label",
+                          attrs: { for: "image" }
+                        },
+                        [_vm._v("Imagen:")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.image,
+                            expression: "image"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", id: "image" },
+                        domProps: { value: _vm.image },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.image = $event.target.value
+                          }
+                        }
+                      })
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-footer" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-secondary",
+                      attrs: { type: "button", "data-dismiss": "modal" }
+                    },
+                    [_vm._v("Cerrar")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { type: "button", id: "guardar" },
+                      on: {
+                        click: function($event) {
+                          return _vm.updateBook()
+                        }
+                      }
+                    },
+                    [_vm._v("Guardar")]
+                  )
+                ])
+              ])
+            ]
+          )
+        ]
+      )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v("Example Component")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v(
-                "\n                    I'm an example component.\n                "
-              )
-            ])
-          ])
-        ])
-      ])
+    return _c("div", [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          attrs: {
+            type: "button",
+            "data-toggle": "modal",
+            "data-target": "#guardarModal"
+          }
+        },
+        [_c("i", { staticClass: "bi bi-plus-circle" })]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
+      _vm._v(" "),
+      _c("th", { attrs: { scope: "col" } }, [_vm._v("Nombre")]),
+      _vm._v(" "),
+      _c("th", { attrs: { scope: "col" } }, [_vm._v("Editorial")]),
+      _vm._v(" "),
+      _c("th", { attrs: { scope: "col" } }, [_vm._v("Autor")]),
+      _vm._v(" "),
+      _c("th", { attrs: { scope: "col" } }, [_vm._v("Genero")]),
+      _vm._v(" "),
+      _c("th", { attrs: { scope: "col" } }, [_vm._v("Precio")]),
+      _vm._v(" "),
+      _c("th", { attrs: { scope: "col" } }, [_vm._v("ISBN")]),
+      _vm._v(" "),
+      _c("th", { attrs: { scope: "col" } }, [_vm._v("Acciones")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Añadir Libro")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
+        [_vm._v("Actualizar Libro")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
     ])
   }
 ]
