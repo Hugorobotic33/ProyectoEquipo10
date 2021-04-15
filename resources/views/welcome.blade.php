@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="es">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,14 +10,26 @@
        
         
         <style>
-            html, body {
+            body {
+             background: url('https://elcultural.com/wp-content/uploads/2019/12/Libros-696x403.jpg') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            background-size: cover;
+            -o-background-size: cover;
+            
+           
+            }
+            body:after{
+                opacity:0.5;
+            }
+            /* html, body {
                 background-color: #fff;
                 color: #636b6f;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
                 height: 100vh;
                 margin: 0;
-            }
+            } */
 
             .full-height {
                 height: 100vh;
@@ -48,37 +60,34 @@
             }
 
             .links > a {
-                color: #636b6f;
+                color: white;
                 padding: 0 25px;
-                font-size: 13px;
+                font-size: 23px;
                 font-weight: 600;
                 letter-spacing: .1rem;
                 text-decoration: none;
                 text-transform: uppercase;
+                background:rgba(0,0,0.5,0.8);
             }
 
             .m-b-md {
                 margin-bottom: 30px;
             }
+            .mt-5{
+                font-size: 100px;
+                letter-spacing: 4px;
+            }
         </style>
-        <script src="{{asset('js/jquery-3.3.1.js')}}"></script>
-        <script src="{{asset('js/jquery-ui.js')}}"></script>
-        <script type="text/javascript">
-
-        $(document).ready(function(){
-            console.log("hola");
-         $("#guardar").click(function(){
-              $("#guardarModal").modal("hide");
-
-         });
-
-        });
+        {{-- <script src="{{asset('js/jquery-3.3.1.js')}}"></script>
+        <script src="{{asset('js/jquery-ui.js')}}"></script> --}}
         
-        
-        </script>
          <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
-         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+         
+         
+         
+         
     </head>
     <body>
         <div class="flex-center position-ref full-height">
@@ -86,6 +95,7 @@
             @if (Route::has('login'))
            
                 <div class="top-right links">
+                    
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                     @else
@@ -95,27 +105,35 @@
                             <a href="{{ route('register') }}">Registrate</a>
                         @endif
                     @endauth
+                    
                 </div>
             @endif
 
-            <div class="content">
-                {{-- <img src="./img/xd.jpg" alt=""> --}}
-                {{-- <div class="title m-b-md">
-                    Laravel
-                </div> --}}
-                <div id="app">
-                    <example-component>
-                       
-
+            <section>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-lg-8" style="background-color:rgba(0,0,0,0.3)">
+                      <h1 class="mt-5" style="color:white">Colibros</h1>
+                      <div style="background-color: black">
+                        <p style="color:white">Colibros es una empresa mexicana 
+                            dedicada a la venta de libros al mejor precio.</p>
+                      </div>
                       
-                    </example-component>    
-                          
+      
+               
+                    </div>
+                  </div>
                 </div>
-                <script src="{{asset('js/app.js')}}"></script>
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
-            </div>
-
-            
+              </section>
         </div>
+
+        
+     
+        
+
+        
     </body>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 </html>

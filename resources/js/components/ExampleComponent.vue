@@ -325,6 +325,7 @@ import axios from 'axios';
                      
                      xd.getLibros();
                      xd.limpiarCampos();
+                     $("[data-dismiss=modal]").trigger({ type: "click" });
                    })
                    .catch(function(error){
                      console.log(error);
@@ -355,7 +356,7 @@ import axios from 'axios';
                     }).then(function(response){
                       xd.getLibros(),
                       xd.limpiarCampos()
-                     
+                      $("[data-dismiss=modal]").trigger({ type: "click" });
                      
 
                     }).catch(function(error){

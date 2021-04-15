@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class Book extends FormRequest
+class VentaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,14 +25,8 @@ class Book extends FormRequest
     {
         return [
             //
-            'name'=>'required',
-            'editorial'=>'required',
-            'autor'=>'required',
-            'genero'=>'required',
-            'paginas'=>'required',
-            'isbn'=>'required',
-            'image'=>'required'
-            
+            'user_id'=>'required',
+            'total'=>'required'
         ];
     }
 }

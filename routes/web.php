@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/admin',function(){
+  return view('admin');
+});
+
 
 Route::group(['middleware'=>['cors']],function(){
   Route::get('libros','BookController@index');
@@ -29,11 +33,13 @@ Route::group(['prefix'=>'api'],function(){
   Route::apiResource('libros','BookController');
 });
 
+//rutas paypal
+Route::get('/paypalxd', 'PaymentController@payWithPayPal')->name('paypalxd');
+Route::get('/status', 'PaymentController@payPalStatus')->name('status');
 
-
-
-
+Route::post('usuario','VentaController@VentaForm');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/user','HomeController@getUser')->name('user');

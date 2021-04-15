@@ -2207,6 +2207,9 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         xd.getLibros();
         xd.limpiarCampos();
+        $("[data-dismiss=modal]").trigger({
+          type: "click"
+        });
       })["catch"](function (error) {
         console.log(error);
       });
@@ -2226,6 +2229,9 @@ __webpack_require__.r(__webpack_exports__);
         'image': this.image
       }).then(function (response) {
         xd.getLibros(), xd.limpiarCampos();
+        $("[data-dismiss=modal]").trigger({
+          type: "click"
+        });
       })["catch"](function (error) {
         console.log(error);
       });
